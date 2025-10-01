@@ -1,0 +1,74 @@
+// O(N) time and O(1) space complexity
+
+class Solution {
+    public int romanToInt(String s) {
+        int n = s.length();
+        int count=0;
+        int i;
+        for(i=n-1;i>0;i--){
+            char ch = s.charAt(i);
+            char lastCh = s.charAt(i-1);
+            if(ch == 'I') count++;
+
+            else if(ch == 'V'){
+                if(lastCh == 'I') {
+                    count+=4;
+                    i--;
+                }
+                else count+=5;
+            }
+
+            else if(ch == 'X'){
+                if(lastCh == 'I') {
+                    count+=9;
+                    i--;
+                }
+                else count+=10;
+            }
+
+            else if(ch == 'L'){
+                if(lastCh == 'X') {
+                    count+=40;
+                    i--;
+                }
+                else count+=50;
+            }
+
+            else if(ch == 'C'){
+                if(lastCh == 'X') {
+                    count+=90;
+                    i--;
+                }
+                else count+=100;
+            }
+
+            else if(ch == 'D'){
+                if(lastCh == 'C') {
+                    count+=400;
+                    i--;
+                }
+                else count+=500;
+            }
+            
+            else if(ch == 'M'){
+                if(lastCh == 'C') {
+                    count+=900;
+                    i--;
+                }
+                else count+=1000;
+            }
+        }
+
+        if(i == 0){
+            if(s.charAt(0)=='I') count++;
+            if(s.charAt(0)=='V') count+=5;
+            if(s.charAt(0)=='X') count+=10;
+            if(s.charAt(0)=='L') count+=50;
+            if(s.charAt(0)=='C') count+=100;
+            if(s.charAt(0)=='D') count+=500;
+            if(s.charAt(0)=='M') count+=1000;
+        }
+
+        return count;
+    }
+}
