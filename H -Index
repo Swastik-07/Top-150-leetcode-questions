@@ -1,0 +1,21 @@
+// NlogN time complexity 
+
+class Solution {
+    public int hIndex(int[] citations) {
+        Arrays.sort(citations);
+        int n = citations.length;   
+        int start=0;
+        int end=n-1;
+        while(start <= end){
+            int temp=citations[start];
+            citations[start] = citations[end];
+            citations[end] = temp;
+            start++;
+            end--;
+        }
+        int i=0;
+        while(i < n && citations[i] > i) i++;
+        return i;
+    }
+}
+
