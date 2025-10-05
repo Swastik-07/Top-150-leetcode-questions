@@ -1,0 +1,48 @@
+class Solution {
+    private void reverse(StringBuilder sb, int i, int j) {
+        while (i < j) {
+            char temp = sb.charAt(i);
+            sb.setCharAt(i, sb.charAt(j));
+            sb.setCharAt(j, temp);
+            i++;
+            j--;
+        }
+    }
+    public String reverseWords(String s) {
+        StringBuilder sb = new StringBuilder();
+
+        boolean lastWasSpace = false;
+
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(Character.isWhitespace(ch)){
+                lastWasSpace = true;
+            }
+            else{
+                if(lastWasSpace && sb.length() > 0){
+                    sb.append(' ');
+                }
+                lastWasSpace = false;
+                sb.append(ch);
+            }
+        }
+
+        sb.reverse();
+        int i = 0;
+        int j = 0;
+
+        while(j<sb.length()){
+            if(sb.charAt(j)==' '){
+                reverse(sb, i, j-1);
+                i=j+1;
+            }
+            j++;
+        }
+
+        if(j==sb.length()){
+            reverse(sb, i, j-1);
+        }
+
+        return sb.toString();
+    }
+}
